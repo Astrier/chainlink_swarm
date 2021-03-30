@@ -26,6 +26,8 @@ services:
       - source: password
         target: /root/password.txt
         mode: 0444
+    depends_on:
+      - db
     volumes:
       # - /root/.chainlink-rinkeby:/root/
       # - chainlinkdata:/root/.chainlink-rinkeby
@@ -73,6 +75,8 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /opt/acme:/opt/acme
+    depends_on:
+      - chainlink
     deploy:
       placement:
         constraints:

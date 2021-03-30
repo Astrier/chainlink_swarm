@@ -1,3 +1,3 @@
 git add -A
-git commit -m "added caddy"
+git commit -m "added depends"
 git push
