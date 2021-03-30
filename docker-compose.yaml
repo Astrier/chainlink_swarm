@@ -1,0 +1,54 @@
+version: "3.7"
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: 9nmuphtd7zqr4bxgcoUa3iejswyfk
+    networks:
+      db_net:
+    ports:
+      - 5432:5432
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure        
+  chainlink:
+    # image: quay.io/spivegin/chainlink:latest
+    # command: chainlink local n -p /root/.password -a /root/.api
+    image: smartcontract/chainlink:0.10.3
+    command: local n -p /root/.chainlink-rinkeby/.password -a /root/.chainlink-rinkeby/.api
+    volumes:
+      # - /root/.chainlink-rinkeby:/root/
+      - /root/.chainlink-rinkeby:/root/.chainlink-rinkeby
+    environment:
+        ROOT: /chainlink
+        LOG_LEVEL: debug
+        ETH_CHAIN_ID: 4
+        MIN_OUTGOING_CONFIRMATIONS: 2
+        LINK_CONTRACT_ADDRESS: 0x01BE23585060835E02B77ef475b0Cc51aA1e0709
+        GAS_UPDATER_ENABLED: "true"
+        CHAINLINK_DEV: "true"
+        CHAINLINK_TLS_REDIRECT: "false"
+        ETH_URL: wss://mainnet.infura.io/ws/v3/b2715daf96274b619917c66ca018e2d2
+        JSON_CONSOLE: "true"
+        TLS_CERT_PATH: /opt/acme/astrier.com/astrier.com/certificates/astrier.com.crt
+        TLS_KEY_PATH: /opt/acme/astrier.com/astrier.com/certificates/astrier.com.key
+        ALLOW_ORIGINS: "*"
+        DATABASE_URL: postgresql://postgres:9nmuphtd7zqr4bxgcoUa3iejswyfk@db:5432/postgres
+        CHAINLINK_PASSWORD: 3d7owgrWjbqch9nzkuaEH4fsvptmyi4
+        CHAINLINK_STORE_PASSWORD: 9j3qhgCabfpoEEH44ciruwdn47evxms
+    networks:
+      db_net:
+    ports:
+      - 6688:6688
+    deploy:
+      replicas: 1
+      # restart_policy:
+      #   condition: never
+
+volumes:
+  databasedata:
+networks:
+  db_net:
+    driver: overlay
+    external: false
