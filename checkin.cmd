@@ -1,3 +1,3 @@
 git add -A
-git commit -m "added depends"
+git commit -m "changed link"
 git push
