@@ -44,8 +44,8 @@ services:
         CHAINLINK_TLS_REDIRECT: "false"
         ETH_URL: wss://mainnet.infura.io/ws/v3/b2715daf96274b619917c66ca018e2d2
         JSON_CONSOLE: "true"
-        TLS_CERT_PATH: /opt/acme/astrier.com/astrier.com/certificates/astrier.com.crt
-        TLS_KEY_PATH: /opt/acme/astrier.com/astrier.com/certificates/astrier.com.key
+        # TLS_CERT_PATH: /opt/acme/astrier.com/astrier.com/certificates/astrier.com.crt
+        # TLS_KEY_PATH: /opt/acme/astrier.com/astrier.com/certificates/astrier.com.key
         ALLOW_ORIGINS: "*"
         DATABASE_URL: postgresql://postgres:9nmuphtd7zqr4bxgcoUa3iejswyfk@db:5432/postgres
         # CHAINLINK_PASSWORD: 3d7owgrWjbqch9nzkuaEH4fsvptmyi4
