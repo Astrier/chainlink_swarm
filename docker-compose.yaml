@@ -15,10 +15,10 @@ services:
       restart_policy:
         condition: on-failure        
   chainlink:
-    # image: quay.io/spivegin/chainlink:latest
-    # command: chainlink node n -p /root/password.txt -a /root/api.txt
-    image: smartcontract/chainlink:0.10.3
-    command: node n -p /root/password.txt -a /root/api.txt
+    image: quay.io/spivegin/chainlink:latest
+    command: chainlink node n -p /root/password.txt -a /root/api.txt
+    # image: smartcontract/chainlink:0.10.3
+    # command: node n -p /root/password.txt -a /root/api.txt
     configs:
       - source: api
         target: /root/api.txt
