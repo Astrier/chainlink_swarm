@@ -39,6 +39,7 @@ services:
         LINK_CONTRACT_ADDRESS: 0x01BE23585060835E02B77ef475b0Cc51aA1e0709
         GAS_UPDATER_ENABLED: "true"
         CHAINLINK_DEV: "true"
+        CLIENT_NODE_URL: http://0.0.0.0:6688
         CHAINLINK_TLS_REDIRECT: "false"
         ETH_URL: wss://mainnet.infura.io/ws/v3/b2715daf96274b619917c66ca018e2d2
         JSON_CONSOLE: "true"
