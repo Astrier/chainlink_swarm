@@ -43,7 +43,7 @@ services:
         CHAINLINK_DEV: "true"
         CHAINLINK_PORT: 6688
         CHAINLINK_TLS_PORT: 0
-        SECURE_COOKIES: false
+        SECURE_COOKIES: "false"
         # CLIENT_NODE_URL: http://chainlink:6688
         CHAINLINK_TLS_REDIRECT: "false"
         ETH_URL: wss://mainnet.infura.io/ws/v3/b2715daf96274b619917c66ca018e2d2
