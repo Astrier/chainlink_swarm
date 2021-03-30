@@ -6,20 +6,30 @@ services:
       POSTGRES_PASSWORD: 9nmuphtd7zqr4bxgcoUa3iejswyfk
     networks:
       db_net:
-    ports:
-      - 5432:5432
+    # ports:
+      # - 5432:5432
+    volumes:
+      - databasedata:/var/lib/postgresql/data/pgdata
     deploy:
       replicas: 1
       restart_policy:
         condition: on-failure        
   chainlink:
     # image: quay.io/spivegin/chainlink:latest
-    # command: chainlink local n -p /root/.password -a /root/.api
+    # command: chainlink local n -p /root/password.txt -a /root/api.txt
     image: smartcontract/chainlink:0.10.3
-    command: local n -p /root/.chainlink-rinkeby/.password -a /root/.chainlink-rinkeby/.api
+    command: local n -p /root/password.txt -a /root/api.txt
+    configs:
+      - source: api
+        target: /root/api.txt
+        mode: 0444
+      - source: password
+        target: /root/password.txt
+        mode: 0444
     volumes:
       # - /root/.chainlink-rinkeby:/root/
-      - /root/.chainlink-rinkeby:/root/.chainlink-rinkeby
+      # - chainlinkdata:/root/.chainlink-rinkeby
+      - chainlinkdata:/root/
     environment:
         ROOT: /chainlink
         LOG_LEVEL: debug
@@ -48,7 +58,15 @@ services:
 
 volumes:
   databasedata:
+  chainlinkdata:
 networks:
   db_net:
     driver: overlay
+    external: false
+configs:
+  api:
+    file: ./chainlink-rinkeby/.api
+    external: false
+  password:
+    file: ./chainlink-rinkeby/.password
     external: false
