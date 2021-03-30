@@ -39,7 +39,8 @@ services:
         LINK_CONTRACT_ADDRESS: 0x01BE23585060835E02B77ef475b0Cc51aA1e0709
         GAS_UPDATER_ENABLED: "true"
         CHAINLINK_DEV: "true"
-        CLIENT_NODE_URL: http://0.0.0.0:6688
+        CHAINLINK_PORT: "6688"
+        CLIENT_NODE_URL: http://chainlink:6688
         CHAINLINK_TLS_REDIRECT: "false"
         ETH_URL: wss://mainnet.infura.io/ws/v3/b2715daf96274b619917c66ca018e2d2
         JSON_CONSOLE: "true"
@@ -50,15 +51,39 @@ services:
         # CHAINLINK_PASSWORD: 3d7owgrWjbqch9nzkuaEH4fsvptmyi4
         # CHAINLINK_STORE_PASSWORD: tA70INcuPYiOoO6B9ztt
     networks:
-      net:
       db_net:
-    ports:
-      - "6688:6688"
     deploy:
       replicas: 1
       # restart_policy:
       #   condition: never
-
+  caddy:
+    image: quay.io/spivegin/caddy_only:caddy2
+    # command: caddy -email ssltricll@txtsme.com -agree=true -log stdout
+    command: caddy run -watch -config=/opt/caddy/Caddyfile
+    configs:
+    - source: caddyfile
+      target: /opt/caddy/Caddyfile
+      mode: 0444
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - net
+      - db_net
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/acme:/opt/acme
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      replicas: 1
+      restart_policy:
+        condition: any
+      resources:
+        reservations:
+          cpus: '0.35'
+          memory: 250M
 volumes:
   databasedata:
   chainlinkdata:
@@ -75,4 +100,7 @@ configs:
     external: false
   password:
     file: ./chainlink-rinkeby/.password
+    external: false
+  caddyfile:
+    file: ./files/caddy/Caddyfile
     external: false

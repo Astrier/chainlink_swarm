@@ -1,3 +1,3 @@
 git add -A
-git commit -m "replaced local with node host"
+git commit -m "added caddy"
 git push

@@ -1,0 +1,4 @@
+chain.astrier.com {
+    tls /opt/acme/astrier.com/astrier.com/certificates/astrier.com.crt /opt/acme/astrier.com/astrier.com/certificates/astrier.com.key
+    reverse_proxy chainlink:6688
+}
