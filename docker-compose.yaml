@@ -47,8 +47,8 @@ services:
         TLS_KEY_PATH: /opt/acme/astrier.com/astrier.com/certificates/astrier.com.key
         ALLOW_ORIGINS: "*"
         DATABASE_URL: postgresql://postgres:9nmuphtd7zqr4bxgcoUa3iejswyfk@db:5432/postgres
-        CHAINLINK_PASSWORD: 3d7owgrWjbqch9nzkuaEH4fsvptmyi4
-        CHAINLINK_STORE_PASSWORD: tA70INcuPYiOoO6B9ztt
+        # CHAINLINK_PASSWORD: 3d7owgrWjbqch9nzkuaEH4fsvptmyi4
+        # CHAINLINK_STORE_PASSWORD: tA70INcuPYiOoO6B9ztt
     networks:
       net:
       db_net:
