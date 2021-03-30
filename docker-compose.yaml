@@ -49,6 +49,7 @@ services:
         CHAINLINK_PASSWORD: 3d7owgrWjbqch9nzkuaEH4fsvptmyi4
         CHAINLINK_STORE_PASSWORD: 9j3qhgCabfpoEEH44ciruwdn47evxms
     networks:
+      net:
       db_net:
     ports:
       - "6688:6688"
@@ -64,6 +65,9 @@ networks:
   db_net:
     driver: overlay
     external: false
+  net:
+    driver: overlay
+    external: true
 configs:
   api:
     file: ./chainlink-rinkeby/.api
