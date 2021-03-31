@@ -33,6 +33,7 @@ services:
       # - chainlinkdata:/root/.chainlink-rinkeby
       - chainlinkdata:/root/
       - /opt/acme:/opt/acme
+      - chainlink:/chainlink
     environment:
         ROOT: /chainlink
         LOG_LEVEL: debug
@@ -93,6 +94,7 @@ services:
 volumes:
   databasedata:
   chainlinkdata:
+  chainlink:
 networks:
   db_net:
     driver: overlay
